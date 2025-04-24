@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoSimulation IA - Generador de Colores</title>
+  <link rel="stylesheet" href="/home/css/style.css">
+</head>
+<body>
+  <!-- Encabezado -->
+  <header>
+    <h1>AutoSimulation IA</h1>
+    <p>Modificación de color de carrocerías utilizando inteligencia artificial</p>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="container">
+    <!-- Sección Izquierda: Cargar Imagen -->
+    <section class="image-upload">
+      <h2>Cargar Imagen Original</h2>
+      <div id="drop-area" class="upload-box">
+        <p>Arrastra tu imagen aquí o haz clic para seleccionar</p>
+        <input type="file" id="image" accept="image/*" style="display: none;">
+        <button id="fileSelectButton">Seleccionar Imagen</button>
+      </div>
+      <!-- Previsualización de Imagen -->
+      <div id="imagePreview" class="image-preview">
+        <p>Previsualización de la imagen cargada aparecerá aquí.</p>
+      </div>
+    </section>
+
+    <!-- Sección Derecha: Resultado Generado -->
+    <section class="image-result">
+      <h2>Resultado Final</h2>
+      <div id="modified-output" class="result-box">
+        <img id="resultImage" alt="Aquí aparecerá el resultado procesado">
+        <div id="download-container" style="display: none;">
+          <a id="download-link" href="#" download>Descargar Imagen</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sección Inferior: Detalles del Prompt -->
+  <section class="prompt-section">
+    <h2>Detalles de Modificación</h2>
+    <form id="imageForm">
+      <textarea id="promptInput" placeholder="Describe el color deseado o detalles específicos..." required>
+Color de la carrocería rojo brillante, únicamente modificar color de la carrocería del vehículo sin afectar otros elementos.
+      </textarea>
+      <button id="generateBtn" type="submit">Generar Modificación</button>
+    </form>
+    <p id="status-message"></p>
+  </section>
+
+  <!-- Enlace al Script -->
+  <script src="/home/js/script.js"></script>
+</body>
+</html>

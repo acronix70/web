@@ -1,0 +1,394 @@
+{
+  "2": {
+    "inputs": {
+      "ckpt_name": "v1-5-pruned.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "5": {
+    "inputs": {
+      "text": "Color de la carrocería rojo brillante,unicamente modificar color de la carroceria del vehiculo sin afectar otros elementos, imagen fotografica de alta resolucion y nitida, diferenciar la carroceria con el entorno, vista realista del vehiculo, evitar tonos grisáceos en el negro y mantener el blanco puro sin reflejos excesivos, mantener color del entorno original.",
+      "clip": [
+        "2",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Prompt +"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "Texto, marcas de agua, fondo alterado o deformado; distorsiones en colores del coche y entorno; iluminación poco realista, sobreexposición de blancos; reflejos metálicos no deseados en negros; pérdida de detalles en el diseño original del vehículo;  iluminación poco natural, sombras artificiales que distorsionen colores; agregar elementos no originales a la carrocería, modificar color de llantas, modificar color de faros, modificar color de vidrios, imagen de baja resolucion, imagen de baja calidad, imagen fotografica de baja resolucion, vista irreal del coche, vista irreal del entorno, confundir el cohe con el entorno, modificar color del entorno de la imagen original, acabado de pintura sucio, afectar elementos no pedidos.",
+      "clip": [
+        "2",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Prompt --"
+    }
+  },
+  "9": {
+    "inputs": {
+      "samples": [
+        "18",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode IF"
+    }
+  },
+  "15": {
+    "inputs": {
+      "image": "imagen_2025-04-13_210602957.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Imagen Original"
+    }
+  },
+  "18": {
+    "inputs": {
+      "seed": 1051036537639160,
+      "steps": 25,
+      "cfg": 5.76,
+      "sampler_name": "euler_cfg_pp",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "30",
+        0
+      ],
+      "negative": [
+        "30",
+        1
+      ],
+      "latent_image": [
+        "131",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "30": {
+    "inputs": {
+      "strength": 0.5500000000000002,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "75",
+        0
+      ],
+      "negative": [
+        "75",
+        1
+      ],
+      "control_net": [
+        "39",
+        0
+      ],
+      "image": [
+        "76",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet (Recolor)"
+    }
+  },
+  "39": {
+    "inputs": {
+      "control_net_name": "ioclab_sd15_recolor.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "67": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_seg_fp16.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "68": {
+    "inputs": {
+      "strength": 0.5400000000000001,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "6",
+        0
+      ],
+      "control_net": [
+        "67",
+        0
+      ],
+      "image": [
+        "70",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet (Seg)"
+    }
+  },
+  "70": {
+    "inputs": {
+      "resolution": 576,
+      "image": [
+        "105",
+        0
+      ]
+    },
+    "class_type": "SAMPreprocessor",
+    "_meta": {
+      "title": "SAM Segmentor"
+    }
+  },
+  "74": {
+    "inputs": {
+      "control_net_name": "control_v1p_sd15_brightness.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "75": {
+    "inputs": {
+      "strength": 0.4000000000000001,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "134",
+        0
+      ],
+      "negative": [
+        "134",
+        1
+      ],
+      "control_net": [
+        "74",
+        0
+      ],
+      "image": [
+        "76",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet (Illumination o Brightness)"
+    }
+  },
+  "76": {
+    "inputs": {
+      "mode": "brightness",
+      "strength": 0.06000000000000001,
+      "enabled": true,
+      "image": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "Brightness_Contrast_Ally",
+    "_meta": {
+      "title": "brightness contrast"
+    }
+  },
+  "105": {
+    "inputs": {
+      "transparency": true,
+      "model": "u2net",
+      "post_processing": true,
+      "only_mask": false,
+      "alpha_matting": true,
+      "alpha_matting_foreground_threshold": 175,
+      "alpha_matting_background_threshold": 25,
+      "alpha_matting_erode_size": 10,
+      "background_color": "none",
+      "images": [
+        "76",
+        0
+      ]
+    },
+    "class_type": "Image Rembg (Remove Background)",
+    "_meta": {
+      "title": "Image Rembg (Remove Background)"
+    }
+  },
+  "107": {
+    "inputs": {
+      "control_net_name": "control_v11f1p_sd15_depth_fp16.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "109": {
+    "inputs": {
+      "strength": 0.5500000000000002,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "68",
+        0
+      ],
+      "negative": [
+        "68",
+        1
+      ],
+      "control_net": [
+        "107",
+        0
+      ],
+      "image": [
+        "111",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet (depth)"
+    }
+  },
+  "111": {
+    "inputs": {
+      "a": 6.280000000000001,
+      "bg_threshold": 0,
+      "resolution": 1024,
+      "image": [
+        "105",
+        0
+      ]
+    },
+    "class_type": "MiDaS-DepthMapPreprocessor",
+    "_meta": {
+      "title": "MiDaS Depth Map"
+    }
+  },
+  "129": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Resultado Final"
+    }
+  },
+  "131": {
+    "inputs": {
+      "pixels": [
+        "15",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "133": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_normalbae_fp16.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "134": {
+    "inputs": {
+      "strength": 0.5500000000000002,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "109",
+        0
+      ],
+      "negative": [
+        "109",
+        1
+      ],
+      "control_net": [
+        "133",
+        0
+      ],
+      "image": [
+        "135",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet (Normal)"
+    }
+  },
+  "135": {
+    "inputs": {
+      "resolution": 1152,
+      "image": [
+        "105",
+        0
+      ]
+    },
+    "class_type": "BAE-NormalMapPreprocessor",
+    "_meta": {
+      "title": "BAE Normal Map"
+    }
+  }
+}
